@@ -28,11 +28,19 @@ class WebViewFragment:Fragment() {
     // view가 만들어진 후
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.webView
 
-        webView.webViewClient = WebViewClient() // 웹뷰 클라이언트 설정
+
+        webView.webViewClient = WebtoonWebViewClient(binding.prograssBar) // 웹뷰 클라이언트 설정
         webView.settings.javaScriptEnabled = true   // 웹뷰 안에서도 자바스크립트 사용 가능하도록 설정
-        webView.loadUrl("https://google.com")   //웹뷰에서 띄울 페이지의 URL연결
+        webView.loadUrl("https://comic.naver.com/webtoon/detail?titleId=783053&no=79")   //웹뷰에서 띄울 페이지의 URL연결
+    }
+
+    fun canGoBack(): Boolean{
+        return binding.webView.canGoBack()
+    }
+
+    fun goBack() {
+        binding.webView.goBack()
     }
 
 }
