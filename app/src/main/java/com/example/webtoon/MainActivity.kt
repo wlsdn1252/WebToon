@@ -3,17 +3,35 @@ package com.example.webtoon
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.webkit.WebViewClient
+import com.example.webtoon.databinding.ActivityMainBinding
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+    lateinit var binding:ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        webView.webViewClient = WebViewClient() // 웹뷰 클라이언트 설정
-        webView.settings.javaScriptEnabled = true   // 웹뷰 안에서도 자바스크립트 사용 가능하도록 설정
+        //버튼1을 누르면 WebViewFragment 실행
+        button1.setOnClickListener {
+            //  supportFragmentManager : 액티비티 내부기능, 액티비티 내의 프래그먼트를 관리함
+            supportFragmentManager.beginTransaction().apply {
+                replace(R.id.FragmentContainer, WebViewFragment())
+                commit()
+            }
+        }
+        //버튼2을 누르면 WebViewFragment 실행
+        button2.setOnClickListener {
+            //  supportFragmentManager : 액티비티 내부기능, 액티비티 내의 프래그먼트를 관리함
+            supportFragmentManager.beginTransaction().apply {
+                replace(R.id.FragmentContainer, BFragment())
+                commit()
+            }
+        }
 
-        webView.loadUrl("https://google.com")   //웹뷰에서 띄울 페이지의 URL연결
-        onProvideAssistData()
+
     }
+
 }
